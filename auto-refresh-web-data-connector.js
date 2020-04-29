@@ -299,11 +299,17 @@ processParam = function(parameter, value) {
 initAutoRefresh = function() {
   console.log("AutoRefresh init");
   countdown._drawCountdownShape(Math.PI*3.5, false);
+  console.log("drawing countdown label");
   countdown._drawCountdownLabel(0);
+  console.log("getting tableau");
   tableau = getTableau();
+  console.log("getting workbook");
   workbook = getCurrentWorkbook();
+  console.log("getting viz");
   viz = getCurrentViz();
+  console.log("adding event listener for tableau param value change");
   viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, onParamChange);
+  console.log("syncing params");
   workbook.getParametersAsync().then(getParameters);
 };
 
