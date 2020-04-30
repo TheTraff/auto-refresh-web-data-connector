@@ -31,4 +31,8 @@ $('#countdown').click(function(e){
 $('#countdown').on("mouseover", function(e) {countdown.showControls(true);});
 $('#countdown').on("mouseout", function(e) {countdown.showControls(false);});
 
-$(document).ready(function() { appApi.initAutoRefresh();} );
+$(document).ready(function() { 
+  tableau.extensions.initializeAsync().then(function () {
+    appApi.initAutoRefresh();
+  } 
+ )});
