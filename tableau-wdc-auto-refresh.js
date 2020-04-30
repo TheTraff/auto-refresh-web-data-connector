@@ -44,6 +44,9 @@ $(document).ready(function() {
 
       // Initialization succeeded! Get the dashboard
       var dashboard = tableau.extensions.dashboardContent.dashboard;
+      initAutoRefresh();
+
+
 
       // Display the name of dashboard in the UI
       $("#resultBox").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
