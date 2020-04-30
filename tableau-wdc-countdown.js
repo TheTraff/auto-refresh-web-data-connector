@@ -298,9 +298,9 @@ initAutoRefresh = function() {
   console.log("AutoRefresh init");
   countdown._drawCountdownShape(Math.PI*3.5, false);
   countdown._drawCountdownLabel(0);
-  tableau = getTableau();
-  workbook = getCurrentWorkbook();
-  viz = getCurrentViz();
+  //tableau = getTableau();
+  //workbook = getCurrentWorkbook();
+  //viz = getCurrentViz();
 	tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(function (parameters) {
         parameters.forEach(getParameter);
 	});
