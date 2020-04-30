@@ -126,6 +126,8 @@
 
     _drawCountdownLabel: function (secondsElapsed) {
       this.ariaText.text(secondsLeft);
+      console.log("now in the draw countdown label function");
+      console.log(this.settings.fontWeight);
       this.pen.font = this.settings.fontWeight + " " + this.settings.fontSize + "px " + this.settings.fontFamily;
       var secondsLeft = this._secondsLeft(secondsElapsed),
           label = secondsLeft === 1 ? this.settings.label[0] : this.settings.label[1],
