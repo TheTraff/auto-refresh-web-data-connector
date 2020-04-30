@@ -2,24 +2,25 @@ var countdown =  $("#countdown").countdown360({
     onComplete  : function () {  
         //getCurrentViz().refreshDataAsync();
 
-				let dataSourceFetchPromises = [];
-      	let dashboardDataSources = {};
-        const dashboard = tableau.extensions.dashboardContent.dashboard;
+			let dataSourceFetchPromises = [];
+			let dashboardDataSources = {};
+			const dashboard = tableau.extensions.dashboardContent.dashboard;
 
-         dashboard.worksheets.forEach(function (worksheet) {
-         		dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
-         });
+			dashboard.worksheets.forEach(function (worksheet) {
+					dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
+			});
 
-         Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
-         		fetchResults.forEach(function (dataSourcesForWorksheet) {
-            		dataSourcesForWorksheet.forEach(function (dataSource) {
-                		if (!dashboardDataSources[dataSource.id]) {
-                    		dashboardDataSources[dataSource.id] = dataSource;
-                        dataSource.refreshAsync();
-                    }
-            		});
-          	});
-       		});
+			Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
+					fetchResults.forEach(function (dataSourcesForWorksheet) {
+							dataSourcesForWorksheet.forEach(function (dataSource) {
+									if (!dashboardDataSources[dataSource.id]) {
+											dashboardDataSources[dataSource.id] = dataSource;
+											dataSource.refreshAsync();
+									}
+							});
+					});
+					countdown.start();
+			});
 
       /*
         var target = window.parent.document.getElementById("loadingSpinner");
