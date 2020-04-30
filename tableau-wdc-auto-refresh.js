@@ -1,7 +1,11 @@
 var countdown =  $("#countdown").countdown360({
     onComplete  : function () {  
-        getCurrentViz().refreshDataAsync();
-        
+        //getCurrentViz().refreshDataAsync();
+        const dashboard = tableau.extensions.dashboardContent.dashboard;
+
+        dashboard.worksheets.forEach(function (worksheet) {
+            dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
+        });
         var target = window.parent.document.getElementById("loadingSpinner");
         if (!$(target).is(':visible')) {
             countdown.start();
