@@ -217,7 +217,7 @@
 
 
 getTableau = function() {
-  return parent.parent.tableau;
+  return tableau;
 };
 
 getCurrentViz = function() {
