@@ -304,8 +304,8 @@ initAutoRefresh = function() {
 	tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(function (parameters) {
         parameters.forEach(getParameter);
 	});
-  viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, onParamChange);
-  workbook.getParametersAsync().then(getParameters);
+  //viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, onParamChange);
+  //workbook.getParametersAsync().then(getParameters);
 };
 
 this.appApi = {
