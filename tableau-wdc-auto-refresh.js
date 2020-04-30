@@ -4,7 +4,7 @@ var countdown =  $("#countdown").countdown360({
         const dashboard = tableau.extensions.dashboardContent.dashboard;
 
         dashboard.worksheets.forEach(function (worksheet) {
-            dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
+            worksheet.getDataSourcesAsync();
         });
         var target = window.parent.document.getElementById("loadingSpinner");
         if (!$(target).is(':visible')) {
