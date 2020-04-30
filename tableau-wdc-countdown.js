@@ -306,6 +306,7 @@ initAutoRefresh = function() {
 	});
   //viz.addEventListener(tableau.TableauEventName.PARAMETER_VALUE_CHANGE, onParamChange);
   //workbook.getParametersAsync().then(getParameters);
+	countdown.start()
 };
 
 this.appApi = {
