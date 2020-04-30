@@ -31,8 +31,19 @@ $('#countdown').click(function(e){
 $('#countdown').on("mouseover", function(e) {countdown.showControls(true);});
 $('#countdown').on("mouseout", function(e) {countdown.showControls(false);});
 
-$(document).ready(function() { 
-  tableau.extensions.initializeAsync().then(function () {
-    appApi.initAutoRefresh();
-  } 
- )});
+(function () {
+	$(document).ready(function () {
+		tableau.extensions.initializeAsync().then(function () {
+		/* body of function  */
+    /* controls what the extension does */
+    /* extension calls other functions here */ 
+
+    } function (err) {
+      // Something went wrong in initialization.
+      console.log('Error while Initializing: ' + err.toString());
+    });
+});
+/*  extension can define other functions here as needed */
+})();
+
+
