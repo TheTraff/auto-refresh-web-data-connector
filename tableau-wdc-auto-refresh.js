@@ -6,6 +6,9 @@ var countdown =  $("#countdown").countdown360({
         dashboard.worksheets.forEach(function (worksheet) {
             worksheet.getDataSourcesAsync();
         });
+
+        countdown.start();
+      /*
         var target = window.parent.document.getElementById("loadingSpinner");
         if (!$(target).is(':visible')) {
             countdown.start();
@@ -26,6 +29,7 @@ var countdown =  $("#countdown").countdown360({
             };
             observer.observe(target, observerConfig);
         }
+     */
     }
 });
 $('#countdown').click(function(e){
