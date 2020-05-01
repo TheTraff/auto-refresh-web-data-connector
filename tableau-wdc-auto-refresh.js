@@ -1,26 +1,40 @@
 var countdown =  $("#countdown").countdown360({
     onComplete  : function () {  
-        //getCurrentViz().refreshDataAsync();
+      //getCurrentViz().refreshDataAsync();
 
-			let dataSourceFetchPromises = [];
-			let dashboardDataSources = {};
-			const dashboard = tableau.extensions.dashboardContent.dashboard;
+		  let dataSourceFetchPromises = [];
+      let dataRefreshPromises = [];
 
-			dashboard.worksheets.forEach(function (worksheet) {
-					dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
-			});
+      // Maps dataSource id to dataSource so we can keep track of unique dataSources.
+      let dashboardDataSources = {};
 
-			Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
-					fetchResults.forEach(function (dataSourcesForWorksheet) {
-							dataSourcesForWorksheet.forEach(function (dataSource) {
-									if (!dashboardDataSources[dataSource.id]) {
-											dashboardDataSources[dataSource.id] = dataSource;
-											dataSource.refreshAsync();
-									}
-							});
-					});
-					countdown.start();
-			});
+      // To get dataSource info, first get the dashboard.
+      const dashboard = tableau.extensions.dashboardContent.dashboard;
+
+      // Then loop through each worksheet and get its dataSources, save promise for later.
+      dashboard.worksheets.forEach(function (worksheet) {
+        dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
+      });
+
+      Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
+        fetchResults.forEach(function (dataSourcesForWorksheet) {
+          dataSourcesForWorksheet.forEach(function (dataSource) {
+            if (!dashboardDataSources[dataSource.id]) { // We've already seen it, skip it.
+              console.log("Found data source: " + dataSource.id);
+              dashboardDataSources[dataSource.id] = dataSource;
+              dataRefreshPromises.push(dataSource.refreshAsync());
+            }
+          });
+        });
+      });
+
+      Promise.all(dataRefreshPromises).then(fetchResults => {
+        console.log("refreshed all data sources");
+        countdown.start();
+      });
+
+
+
 
       /*
         var target = window.parent.document.getElementById("loadingSpinner");
