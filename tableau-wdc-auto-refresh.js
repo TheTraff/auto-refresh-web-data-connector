@@ -60,7 +60,8 @@ var countdown =  $("#countdown").countdown360({
         console.log("refreshed all data sources");
         countdown.start();
       });
-    });
+    }
+});
 
 $('#countdown').click(function(e){
     countdown.getStatus() ? countdown.pause() : countdown.cont();
