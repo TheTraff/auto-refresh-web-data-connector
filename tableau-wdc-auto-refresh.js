@@ -28,39 +28,41 @@ var countdown =  $("#countdown").countdown360({
         });
       });
 
-      /*
-      Promise.all(dataRefreshPromises).then(fetchResults => {
-        console.log(fetchResults);
-        console.log("refreshed all data sources");
-        countdown.start();
-      });
-      */
+      console.log("The length of dataSourceFetchPromises is " + dataSourceFetchPromises.length + " and the length of dataRefreshPromises is " + dataRefreshPromises.length);
 
-      var target = $("#loading");
-      if (!$(target).is(':visible')) {
-        console.log("starting the countdown...");
-        countdown.start();
-      } else {
-        var observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutationRecord) {
-            if (!$(target).is(':visible')) {
-              observer.disconnect();
-              console.log("starting countdown... (in the mutation observer)");
-              countdown.start();
-            }
+      Promise.all(dataRefreshPromises).then(fetchResults => {
+        console.log("Now doing stuff after the dataRefreshPromises have been fulfilled...");
+        var target = $("#loading");
+        if (!$(target).is(':visible')) {
+          console.log("starting the countdown...");
+          countdown.start();
+        } else {
+          var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+              if (!$(target).is(':visible')) {
+                observer.disconnect();
+                console.log("starting countdown... (in the mutation observer)");
+                countdown.start();
+              }
+            });
           });
-        });
-        var observerConfig = {
-          attributes: true,
-          attributeFilter: ['style'],
-          childList: false,
-          subtree: false
-        };
-        console.log("starting loading icon observer...");
-        observer.observe(target, observerConfig);
+          var observerConfig = {
+            attributes: true,
+            attributeFilter: ['style'],
+            childList: false,
+            subtree: false
+          };
+          console.log("starting loading icon observer...");
+          observer.observe(target, observerConfig);
+        }
       }
-    }
+
+      console.log("refreshed all data sources");
+      countdown.start();
+    });
+
 });
+
 $('#countdown').click(function(e){
     countdown.getStatus() ? countdown.pause() : countdown.cont();
 });
