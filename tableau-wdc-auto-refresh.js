@@ -38,12 +38,14 @@ var countdown =  $("#countdown").countdown360({
 
       var target = $("#loading");
       if (!$(target).is(':visible')) {
+        console.log("starting the countdown...");
         countdown.start();
       } else {
         var observer = new MutationObserver(function(mutations) {
           mutations.forEach(function(mutationRecord) {
             if (!$(target).is(':visible')) {
               observer.disconnect();
+              console.log("starting countdown... (in the mutation observer)");
               countdown.start();
             }
           });
@@ -54,6 +56,7 @@ var countdown =  $("#countdown").countdown360({
           childList: false,
           subtree: false
         };
+        console.log("starting loading icon observer...");
         observer.observe(target, observerConfig);
       }
     }
