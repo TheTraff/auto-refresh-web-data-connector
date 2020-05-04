@@ -18,7 +18,7 @@
       fontSize: undefined,             // the font size, dynamically calulated if omitted in options
       fontWeight: 700,                 // the font weight
       autostart: false,                // start the countdown automatically
-      seconds: 10,                     // the number of seconds to count down
+      seconds: 30,                     // the number of seconds to count down
       label: ["second", "seconds"],    // the label to use or false if none
       smooth: true,                    // should the timer be smooth or stepping
       direction: "cw",                 // Clockwise (cw) or counter-clockwise (ccw)
