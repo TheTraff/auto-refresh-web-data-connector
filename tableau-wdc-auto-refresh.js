@@ -16,7 +16,7 @@ var countdown =  $("#countdown").countdown360({
         dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
       });
 
-      Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
+      const data = await Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
         fetchResults.forEach(function (dataSourcesForWorksheet) {
           dataSourcesForWorksheet.forEach(function (dataSource) {
             if (!dashboardDataSources[dataSource.id]) { // We've already seen it, skip it.
