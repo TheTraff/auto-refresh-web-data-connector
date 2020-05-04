@@ -29,6 +29,7 @@ var countdown =  $("#countdown").countdown360({
       });
 
       Promise.all(dataRefreshPromises).then(fetchResults => {
+        console.log(fetchResults);
         console.log("refreshed all data sources");
         countdown.start();
       });
