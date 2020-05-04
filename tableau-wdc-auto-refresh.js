@@ -16,7 +16,7 @@ var countdown =  $("#countdown").countdown360({
         dataSourceFetchPromises.push(worksheet.getDataSourcesAsync());
       });
 
-      const data = await Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
+      Promise.all(dataSourceFetchPromises).then(function (fetchResults) {
         fetchResults.forEach(function (dataSourcesForWorksheet) {
           dataSourcesForWorksheet.forEach(function (dataSource) {
             if (!dashboardDataSources[dataSource.id]) { // We've already seen it, skip it.
@@ -27,10 +27,18 @@ var countdown =  $("#countdown").countdown360({
             }
           });
         });
+        console.log("The length of dataSourceFetchPromises is " + dataSourceFetchPromises.length + " and the length of dataRefreshPromises is " + dataRefreshPromises.length);
+
+        Promise.all(dataRefreshPromises).then(fetchResults => {
+          console.log("executing code after all data sources have refreshed...");
+          console.log("starting countdown...");
+          countdown.start();
+        });
+
       });
+    }
 
-      console.log("The length of dataSourceFetchPromises is " + dataSourceFetchPromises.length + " and the length of dataRefreshPromises is " + dataRefreshPromises.length);
-
+      /*
       Promise.all(dataRefreshPromises).then(fetchResults => {
         console.log("Now doing stuff after the dataRefreshPromises have been fulfilled...");
         var target = $("#loading");
@@ -60,7 +68,7 @@ var countdown =  $("#countdown").countdown360({
         console.log("refreshed all data sources");
         countdown.start();
       });
-    }
+      */
 });
 
 $('#countdown').click(function(e){
