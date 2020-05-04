@@ -56,13 +56,11 @@ var countdown =  $("#countdown").countdown360({
           console.log("starting loading icon observer...");
           observer.observe(target, observerConfig);
         }
-      }
 
-      console.log("refreshed all data sources");
-      countdown.start();
+        console.log("refreshed all data sources");
+        countdown.start();
+      });
     });
-
-});
 
 $('#countdown').click(function(e){
     countdown.getStatus() ? countdown.pause() : countdown.cont();
