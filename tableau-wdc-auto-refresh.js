@@ -22,6 +22,7 @@ var countdown =  $("#countdown").countdown360({
             if (!dashboardDataSources[dataSource.id]) { // We've already seen it, skip it.
               console.log("Found data source: " + dataSource.id);
               dashboardDataSources[dataSource.id] = dataSource;
+              console.log("calling refresh async and adding promise to list");
               dataRefreshPromises.push(dataSource.refreshAsync());
             }
           });
@@ -34,7 +35,7 @@ var countdown =  $("#countdown").countdown360({
         console.log("Now doing stuff after the dataRefreshPromises have been fulfilled...");
         var target = $("#loading");
         if (!$(target).is(':visible')) {
-          console.log("starting the countdown...");
+          console.log("starting the countdown... (because the loading indicator is not visible)");
           countdown.start();
         } else {
           var observer = new MutationObserver(function(mutations) {
